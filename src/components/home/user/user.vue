@@ -16,7 +16,7 @@
         <el-button type="primary" @click="useradd()">添加用户</el-button>
       </div>
       <!--表格-->
-      <el-table :data="userList" border style="width: 100%">
+      <el-table :data="userList" border style="width: 100%" stripe>
           <el-table-column type="index" label="#" width="50"></el-table-column>
           <el-table-column prop="username" label="姓名"></el-table-column>
           <el-table-column prop="email" label="邮箱"></el-table-column>
@@ -38,7 +38,7 @@
               <el-button type="danger" icon="el-icon-delete" size="mini" @click="deteleUser(scope.row)"></el-button>
               <!--分配角色按钮-->
               <el-tooltip content="分配角色" placement="top" :enterable="false">
-                <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+                <el-button type="warning" icon="el-icon-setting" size="mini" @click="assignroles(scope.row)"></el-button>
               </el-tooltip>
             </template>
           </el-table-column>
@@ -94,6 +94,24 @@
         </div>
       </el-dialog>
       <!--分配角色的对话框-->
+      <el-dialog title="分配权限" :visible.sync="assignUsers">
+        <p>当前的用户：{{assignRolesRule.username}}</p>
+        <p>当前的角色：{{assignRolesRule.role_name}}</p>
+        <p>分配新角色：
+          <el-select v-model="newroles" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </p>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="assignUsers = false">取 消</el-button>
+          <el-button type="primary" @click="assignUsersDetermine()">确 定</el-button>
+        </div>
+      </el-dialog>
   </div>
 </template>
 
@@ -136,6 +154,7 @@ export default {
       dialogFormVisible: false,
       addUsers: false,
       assignRoles: false,
+      assignUsers: false,
       formLabelWidth: '80px',
       // 修改用户的表单
       ruleForm: {
@@ -172,11 +191,13 @@ export default {
         password: ''
       },
       // 分配新角色的数据
-      assignRolesRule: {
-        username: '',
-        role_name: '',
-        region: ''
-      }
+      assignRolesRule: { },
+      // 分配角色的数据
+      newroles: '',
+      // 角色的数据
+      options: [],
+      // 分配角色的id数值
+      assignrolesId: ''
     }
   },
   created () {
@@ -268,7 +289,7 @@ export default {
     },
     // 删除用户的函数
     async deteleUser (val) {
-      const deteleconfirm = await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      const deteleconfirm = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -313,6 +334,34 @@ export default {
     cancelAddUsers () {
       this.addUsers = !this.addUsers
     },
+    // 分配角色的函数
+    async assignroles (val) {
+      // 点击分配角色的时候，保存当前的id
+      this.assignrolesId = val.id
+      this.assignRolesRule = val
+      // 发送请求，获取角色的数据
+      const { data: res } = await this.$http.get('roles')
+      console.log(res)
+      this.options = res.data
+      this.assignUsers = !this.assignUsers
+      // console.log(this.assignRolesRule)
+    },
+    // 点击分配角色的确定按钮
+    async assignUsersDetermine () {
+      if (this.newroles === '') {
+        this.$message({ type: 'warning', message: '请选择要分配的新角色！', duration: 1000 })
+        return false
+      }
+      // console.log(this.assignrolesId)
+      // console.log(this.newroles)
+      const { data: res } = await this.$http.put(`users/${this.assignrolesId}/role`, { rid: this.newroles })
+      console.log(res)
+      // 重新请求获取用户的函数
+      this.getusers()
+      this.assignUsers = !this.assignUsers
+      // 重置选择框中的内容
+      this.newroles = ''
+    },
     // 确定添加用户的函数
     determineAddUsers () {
       this.$refs.adduserRule.validate(async valid => {
@@ -340,20 +389,6 @@ export default {
 }
 .item {
   padding: 18px 0;
-}
-.box-card {
-  width: 81%;
-  margin: 20px 0px 20px 0px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-/deep/ .el-card.is-always-shadow{
-  box-shadow: 0px 1px 1px rgba(0,0,0,0.15);
-}
-.el-breadcrumb{
-  height: 14px;
-  font-size: 14px;
-  line-height: 1;
 }
 .el-input-group{
   width: 33.33%;

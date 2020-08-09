@@ -5,6 +5,9 @@ import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
 import axios from 'axios'
+// 引入echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 // 配置请求的跟路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 通过axios的请求拦截器来添加token，保证拥有获取数据的权限
