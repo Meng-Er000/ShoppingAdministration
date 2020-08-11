@@ -6,6 +6,7 @@ import Welcome from '../components/home/welcome/welcome.vue'
 import User from '../components/home/user/user.vue'
 import Power from '../components/jurisdiction/power.vue'
 import Roles from '../components/jurisdiction/roles.vue'
+import Classification from '../components/Product/classification.vue'
 
 Vue.use(Router)
 
@@ -21,7 +22,8 @@ const router = new Router({
         { path: '/welcome', component: Welcome },
         { path: '/users', component: User },
         { path: '/rights', component: Power },
-        { path: '/roles', component: Roles }
+        { path: '/roles', component: Roles },
+        { path: '/categories', component: Classification }
       ]
     }
   ]

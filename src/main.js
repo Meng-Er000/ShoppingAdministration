@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
+// 安装vue-table-with-tree-grid插件
+import ZkTable from 'vue-table-with-tree-grid'
 // 导入全局样式表
 import './assets/css/global.css'
 import axios from 'axios'
@@ -20,6 +22,7 @@ axios.interceptors.request.use(config => {
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
+Vue.component('tree-table', ZkTable)
 
 new Vue({
   router,
