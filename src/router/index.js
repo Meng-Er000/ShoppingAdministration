@@ -11,11 +11,8 @@ import Params from '../components/params/params.vue'
 import Goods from '../components/params/goods.vue'
 import AddGoods from '../components/params/add.vue'
 import Order from '../components/order/order.vue'
-<<<<<<< HEAD
 import Reports from '../components/reports/reports.vue'
-=======
 import Report from '../components/report/report.vue'
->>>>>>> dataStatistics
 
 Vue.use(Router)
 
@@ -37,11 +34,8 @@ const router = new Router({
         { path: '/goods', component: Goods },
         { path: '/goods/add', component: AddGoods },
         { path: '/orders', component: Order },
-<<<<<<< HEAD
-        { path: '/reports', component: Reports }
-=======
+        { path: '/reports', component: Reports },
         { path: '/reports', component: Report }
->>>>>>> dataStatistics
       ]
     }
   ]
