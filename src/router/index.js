@@ -2,6 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/login/login.vue'
 import Home from '../components/home/home.vue'
+import Welcome from '../components/home/welcome/welcome.vue'
+import User from '../components/home/user/user.vue'
+import Power from '../components/jurisdiction/power.vue'
+import Roles from '../components/jurisdiction/roles.vue'
+import Classification from '../components/params/classification.vue'
+import Params from '../components/params/params.vue'
+import Goods from '../components/params/goods.vue'
+import AddGoods from '../components/params/add.vue'
+import Order from '../components/order/order.vue'
 
 Vue.use(Router)
 
@@ -9,7 +18,22 @@ const router = new Router({
   routes: [
     { path: '/login', component: Login },
     { path: '/', redirect: '/login' },
-    { path: '/home', component: Home }
+    {
+      path: '/home',
+      component: Home,
+      redirect: '/welcome',
+      children: [
+        { path: '/welcome', component: Welcome },
+        { path: '/users', component: User },
+        { path: '/rights', component: Power },
+        { path: '/roles', component: Roles },
+        { path: '/categories', component: Classification },
+        { path: '/params', component: Params },
+        { path: '/goods', component: Goods },
+        { path: '/goods/add', component: AddGoods },
+        { path: '/orders', component: Order }
+      ]
+    }
   ]
 })
 
