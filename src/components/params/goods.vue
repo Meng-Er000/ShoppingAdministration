@@ -33,17 +33,17 @@
             <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
         </el-table-column>
       </el-table>
+      <!--分页-->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pagenum"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="queryInfo.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </el-card>
-    <!--分页-->
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="queryInfo.pagenum"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="queryInfo.pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total">
-    </el-pagination>
   </div>
 </template>
 
@@ -118,7 +118,7 @@ export default {
 /deep/ .el-table .cell {
   font-size: 12px;
 }
-/deep/ .el-pagination{
-  margin-left: 240px;
+.el-pagination {
+  margin-top: 15px;
 }
 </style>

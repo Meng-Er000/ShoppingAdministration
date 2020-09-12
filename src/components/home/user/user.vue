@@ -43,17 +43,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <!--分页-->
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="queryInfo.pagenum"
+          :page-sizes="[1, 2, 5, 10]"
+          :page-size="queryInfo.pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+        </el-pagination>
     </el-card>
-      <!--分页-->
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="queryInfo.pagenum"
-        :page-sizes="[1, 2, 5, 10]"
-        :page-size="queryInfo.pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total">
-      </el-pagination>
       <!--修改用户的对话框-->
       <el-dialog title="修改用户信息" :visible.sync="dialogFormVisible" @close="changeClosed()">
         <el-form :model="ruleForm" ref="ruleForm" :rules="rule">
@@ -403,8 +403,8 @@ export default {
   padding-bottom: 0px;
   padding-left: 10px;
 }
-/deep/ .el-pagination{
-  margin-left: 240px;
+.el-pagination {
+  margin-top: 15px;
 }
 .nowusers{
   display: block;

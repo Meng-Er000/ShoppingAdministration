@@ -32,17 +32,17 @@
           <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteclassification(scope3.row)">删除</el-button>
         </template>
       </tree-table>
+      <!--分页-->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="categories.pagenum"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="categories.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="productdata.total">
+      </el-pagination>
     </el-card>
-    <!--分页-->
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="categories.pagenum"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="categories.pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="productdata.total">
-    </el-pagination>
     <!--编辑-->
     <el-dialog title="修改分类" :visible.sync="revise.modifyClassification" @close="changeClosed()">
       <el-form :model="revise.modify" ref="reviseModify" :rules="revise.rule">
@@ -333,8 +333,8 @@ export default {
 /deep/ .zk-table{
   margin-top: 15px;
 }
-/deep/ .el-pagination{
-  margin-left: 240px;
+.el-pagination {
+  margin-top: 15px;
 }
 .el-cascader{
   width: 100%;

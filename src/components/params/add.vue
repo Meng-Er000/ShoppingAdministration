@@ -52,8 +52,8 @@
             </el-cascader>
           </el-form-item>
         </el-tab-pane>
-        <el-tab-pane label="商品参数" name="1">配置管理</el-tab-pane>
-        <el-tab-pane label="商品属性" name="2">角色管理</el-tab-pane>
+        <el-tab-pane label="商品参数" name="1">持续更新中</el-tab-pane>
+        <el-tab-pane label="商品属性" name="2">持续更新中</el-tab-pane>
         <el-tab-pane label="商品图片" name="3">
           <!--action表示将选择的图片上传到什么位置，查看api接口文档-->
           <el-upload
