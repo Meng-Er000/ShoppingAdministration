@@ -36,10 +36,64 @@ cloneDeep（obj）可以实现深拷贝，把数据重新复制一次，然后�
 
 ### git操作
 
-把创建的分支推送到github上面： git push -u origin 分支名称
+把创建的分支推送到github上面: git push -u origin 分支名称
 
 切换到主分支：git checkout
 
 把创建的分支合并到master主分支上面： git merge 新创建的分支名称
 
 把本地的master代码推送到github上面： git push
+
+### 在vue中使用echarts
+
+1. 导入echarts
+
+   ```
+   import echarts from 'echarts'
+   ```
+
+2. 使用echarts时候，我们需要对echarts来设置一个具有宽度和高度的DOM元素
+
+   ```
+   <div id="main" style="width: 600px;height: 400px;"></div>
+   ```
+
+3. 在mounted钩子函数中进行配置初始化等等操作
+
+   - 基于准备好的dom，初始化echarts实例
+
+     ```
+     const myChart = echarts.init(document.getElementById('main'))
+     ```
+
+   - 指定图表的配置项和数据
+
+     ```
+     var option = {
+                 title: {
+                     text: 'ECharts 入门示例'
+                 },
+                 tooltip: {},
+                 legend: {
+                     data:['销量']
+                 },
+                 xAxis: {
+                     data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                 },
+                 yAxis: {},
+                 series: [{
+                     name: '销量',
+                     type: 'bar',
+                     data: [5, 20, 36, 10, 10, 20]
+                 }]
+             };
+     ```
+
+   - 使用刚指定的配置项和数据显示图表
+
+     ```
+     myChart.setOption(option); 
+     ```
+
+
+
