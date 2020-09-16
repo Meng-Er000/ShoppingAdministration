@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+// import './plugins/element.js'
 // 安装vue-table-with-tree-grid插件
 import ZkTable from 'vue-table-with-tree-grid'
 // 导入vue-quill-editor依赖
 import VueQuillEditor from 'vue-quill-editor'
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
 // 导入全局样式表
 import './assets/css/global.css'
 import axios from 'axios'
@@ -16,7 +13,6 @@ import axios from 'axios'
 import echarts from 'echarts'
 // 引入进度条的css
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
 Vue.use(VueQuillEditor)
 Vue.prototype.$echarts = echarts
 // 配置请求的跟路径
